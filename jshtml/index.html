@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form>
+            <input id = "nombre" type="text" name = "Correo">
+            <input id = "correo" type = "text" name = "Correo">
+            <button onclick="captura()" type="reset">Enviar datos</button>
+        </form>
+        <table id = "tabla">
+            <td>nombre</td> <td>correo</td>
+        </table>
+    </div>
+    <script>
+        function captura(){
+
+            function Persona(nombre,correo){
+                this.nombre = nombre || "";
+                this.correo = correo || "";
+            }
+            let nombre = document.getElementById("nombre").value;
+            let correo = document.getElementById("correo").value;
+            console.log(nombre);
+            console.log(correo);
+
+            persona1 = new Persona(nombre, correo);
+            agregar();
+           
+        }
+
+        let baseDatos = [];
+
+        function agregar(){
+            baseDatos.push(persona1);
+            console.log(baseDatos);
+
+            document.getElementById("tabla").innerHTML +="<tbody><td>"+persona1.nombre+"</td><td>" + persona1.correo + "</tds> </tbody>"
+
+        }
+
+
+    </script>
+</body>
+</html>
