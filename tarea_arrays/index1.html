@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>punto_1</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div>
+        <form>
+            <input id = "N" type="number" name = "N">
+            <button onclick="fits()" type="reset">Enviar datos</button>
+        </form>
+    </div>    
+
+    <div id="myDiv"></div>
+    <button onclick='change()'>Cambiar puntos</button>
+
+    <script>
+
+            function fits() {
+                console.log(Number.isInteger(Number(document.getElementById("N").value)));
+            if (Number.isInteger(Number(document.getElementById("N").value))) {
+                capture(Number(document.getElementById("N").value));
+            }
+            else {
+                console.log('NO INTEGER!');
+            }
+            
+            }
+
+            function capture(N){    
+                
+                var x = [];
+                var y = [];
+                for(i = 0; i < N; i++){
+                    x.push(Math.random()*18 + 12);
+                    y.push(Math.random()*18 + 12);
+                }
+
+                points = {
+                    x:x,
+                    y:y,
+                    mode: 'markers',
+                    type: 'scatter'
+                };
+    
+                console.log(points.x);
+                console.log(points.y);
+    
+                Plotly.newPlot('myDiv', [points]);
+
+                N_backup = N;
+               
+            }   
+
+            function change(){
+                capture(N_backup);
+            }
+
+
+        </script>
+    
+</body>
+</html>
