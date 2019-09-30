@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>punto_2</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    
+    <table id = "tabla">
+            <td>Categoría</td> <td>Conteo</td>
+            <tbody>
+                <td>
+                    Categoría 1
+                </td>
+                <td>
+                    <input id = "cat_1" type="number" name = "cat_1">
+                </tds>
+            
+            </tbody>
+
+            <tbody>
+                <td>
+                    Categoría 2
+                </td>
+                <td>
+                    <input id = "cat_2" type="number" name = "cat_2">
+                </tds>
+            </tbody>
+
+             <tbody>       
+                <td>
+                    Categoría 3
+                </td>
+                <td>
+                    <input id = "cat_3" type="number" name = "cat_3">
+                </tds>
+                
+            </tbody>
+    </table>
+
+    <div id="myDiv"></div>
+    <button onclick='graph()'>Graficar</button>
+
+    <script>
+
+            function graph() {
+                points = {
+                    x:["Categoría 1", "Categoría 2", "Categoría 3"],
+                    y:[
+                        Number(document.getElementById("cat_1").value),
+                        Number(document.getElementById("cat_2").value),
+                        Number(document.getElementById("cat_3").value)
+                    ],
+                    type: 'bar'
+                };
+
+                Plotly.newPlot('myDiv', [points]);
+            }
+        </script>
+    
+</body>
+</html>
