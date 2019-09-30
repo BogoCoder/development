@@ -8,8 +8,8 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    
-    <table id = "tabla">
+
+    <table id = "tabla" border>
             <td>Categoría</td> <td>Conteo</td>
             <tbody>
                 <td>
@@ -18,7 +18,7 @@
                 <td>
                     <input id = "cat_1" type="number" name = "cat_1">
                 </tds>
-            
+
             </tbody>
 
             <tbody>
@@ -30,14 +30,14 @@
                 </tds>
             </tbody>
 
-             <tbody>       
+             <tbody>
                 <td>
                     Categoría 3
                 </td>
                 <td>
                     <input id = "cat_3" type="number" name = "cat_3">
                 </tds>
-                
+
             </tbody>
     </table>
 
@@ -60,6 +60,6 @@
                 Plotly.newPlot('myDiv', [points]);
             }
         </script>
-    
+
 </body>
 </html>
