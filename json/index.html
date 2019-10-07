@@ -4,25 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Nueva App</title>
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="styleshee"/>
+    <link href="style.css" rel="styleshet"/>
 </head>
 <body>
-    <script>
-        var request = new XMLHttpRequest();
+    <div id="root"></div>
+    <script src="script.js"></script>
 
-        request.onlaod = function(){
-            var data = JSON.parse(this.reponse)
-            console.log(data)
-            for(var i = 0; i < data.length; i++){
-                console.log(data[i].name + ' is a ' + data[i].race + '.')
-            }
-        }
-        request.open('GET', 'data.json', true);
-
-        // console.log(data[1].name)
-        // for(var i = 0; i < data.length; i++){
-        //     console.log(data[i].name + ' is a ' + data[i].race + '.')
-        // }
     </script>
 </body>
 </html>
