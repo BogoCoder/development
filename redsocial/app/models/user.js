@@ -13,4 +13,4 @@ var UserSchema = Schema({
     birthdate:String
 })
 
-module.exports = mongoose.mode('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);
