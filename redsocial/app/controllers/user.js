@@ -1,6 +1,8 @@
 'use strict'
 
 var User = require("../models/user");
+var bcrypt = require('bcryptjs');
+var token = require("../services/jwt");
 
 function home(req, res){
     res.status(200).send({
@@ -17,7 +19,7 @@ function pruebas(req, res){
 function saveUser(req, res){
     var params = req.body;
     var user = new User();
-
+    console.log(params)
     if(params.name && params.email && params.password && params.nick){
         user.name = params.name;
         user.nick = params.nick;
@@ -26,10 +28,9 @@ function saveUser(req, res){
         user.email = params.email;
         user.role = params.role;
         user.image = params.image;
-
-        // Aqui vamos a ahacer algo con el password
-
-        bcrypt.hash(params.password, null, null, (err, hash) => {
+        // Aqui vamos a hacer algo con el password
+        
+        bcrypt.hash(params.password, 5,  (err, hash) => {
             user.password = hash;
             user.save((err, userStored)=>{
                 if(err){
@@ -43,24 +44,40 @@ function saveUser(req, res){
                     return res.status(404).send({message: "Something failed"})
                 } 
 
-            })
-        })
+            }) ; 
+        }) ;
+    }
+
+    else{
+        return res.status(200).send({message: "not enough input"});
     }
 }
 
-function login(){
+function login(req, res){
     var params = req.body;
     var email = params.email;
     var password = params.password;
-
+    console.log(params.email);
     User.findOne({email: email}, (err, user) =>{
         if(err){
             return res.status(500).send({message: 
             "Error al consultar en la base de datos"})
         }
         if(user){
+            console.log(password, user.password);
             bcrypt.compare(password, user.password, (err,check) => {
+                if(check){
+                    if(params.gettoken){
+                        return res.status(200).send({token:token.createToken(user)})
+                    }
+                    else{
+                        return res.status(200).send({user:user})
+                    }
+                }
                 if(err){ return res.status(404).send({message: "El usuario o la contraseña son incorrectos"})}
+                else{
+                    return res.status(200).send({user:user})
+                }
             })
         }
     })
@@ -70,5 +87,6 @@ function login(){
 module.exports = {
     home,
     pruebas,
-    saveUser
+    saveUser,
+    login
 }

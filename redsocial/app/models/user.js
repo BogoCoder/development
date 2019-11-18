@@ -1,4 +1,4 @@
-"user strict"
+"use strict"
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
@@ -10,7 +10,8 @@ var UserSchema = Schema({
     nick:String,
     role:String,
     image:String,
-    birthdate:String
+    birthdate:String,
+    password:String
 })
 
 module.exports = mongoose.model('User', UserSchema);
