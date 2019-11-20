@@ -3,6 +3,7 @@
 var User = require("../models/user");
 var bcrypt = require('bcryptjs');
 var token = require("../services/jwt");
+var paginate = require("mongoose-paginate");
 
 function home(req, res){
     res.status(200).send({
@@ -84,9 +85,67 @@ function login(req, res){
 
 }
 
+function getUser(req, res){
+    var userId= req.params.id;
+    User.findById(userId, (err,user) => {
+        if(err){
+            return res.status(500).send({
+                message: "An error in database"
+            })
+        }
+        if(!user){
+            return res.status(404).send({
+                message:  "we don't find uspaginateer"
+            })
+
+        }
+        return res.status(200).send({
+            user
+        })
+    })
+}
+
+
+function getUsers(req, res){
+    var identityId = req.user.sub;
+
+    var page = 1;
+
+    if(req.params.page){
+        page = req.params.page
+    }
+
+    var itemsPerPage = 3;
+
+    User.find.sort("_id").paginate(page, itemsPerPage, (err, users, total) =>{
+        if(err){
+            return res.status(500).send({
+                message: "Error"
+            })
+        }
+
+        if(!users){
+            return res.status(404).send({
+                message: "There are no users to show"
+            })
+        }
+
+        return res.status(200).send({
+            users:users,
+            total,
+            pages: Math.ceil(total/itemsPerPage)
+        })
+    })
+
+
+}
+
+
 module.exports = {
     home,
     pruebas,
     saveUser,
-    login
+    login,
+    getUser,
+    getUsers
 }
